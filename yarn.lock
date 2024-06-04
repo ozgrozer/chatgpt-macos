@@ -2824,26 +2824,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ReactNativeMacOS@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "ReactNativeMacOS@workspace:."
-  dependencies:
-    "@babel/core": ^7.20.0
-    "@babel/preset-env": ^7.20.0
-    "@babel/runtime": ^7.20.0
-    "@react-native/babel-preset": 0.74.84
-    "@react-native/metro-config": 0.74.84
-    "@types/react": ^18.2.6
-    "@types/react-test-renderer": ^18.0.0
-    prettier: 2.8.8
-    react: 18.2.0
-    react-native: 0.74.2
-    react-native-macos: ^0.73.30
-    react-test-renderer: 18.2.0
-    standard: ^17.1.0
-  languageName: unknown
-  linkType: soft
-
 "abbrev@npm:^2.0.0":
   version: 2.0.0
   resolution: "abbrev@npm:2.0.0"
@@ -3448,6 +3428,26 @@ __metadata:
   checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
   languageName: node
   linkType: hard
+
+"chatgpt-macos@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "chatgpt-macos@workspace:."
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@babel/preset-env": ^7.20.0
+    "@babel/runtime": ^7.20.0
+    "@react-native/babel-preset": 0.74.84
+    "@react-native/metro-config": 0.74.84
+    "@types/react": ^18.2.6
+    "@types/react-test-renderer": ^18.0.0
+    prettier: 2.8.8
+    react: 18.2.0
+    react-native: 0.74.2
+    react-native-macos: ^0.73.30
+    react-test-renderer: 18.2.0
+    standard: ^17.1.0
+  languageName: unknown
+  linkType: soft
 
 "chownr@npm:^2.0.0":
   version: 2.0.0
