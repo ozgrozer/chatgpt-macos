@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import {
   View,
   Text,
+  Keyboard,
   TextInput,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
-  Keyboard
+  SafeAreaView
 } from 'react-native'
 
 export default () => {
@@ -32,16 +32,14 @@ export default () => {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.messageContainer}>
         {messages.map((message, index) => (
-          <View key={index} style={styles.message}>
-            <Text
-              style={
-                message.sender === 'user'
-                  ? styles.userMessage
-                  : styles.assistantMessage
-              }
-            >
-              {message.text}
-            </Text>
+          <View
+            key={index}
+            style={[
+              styles.message,
+              message.sender === 'user' ? styles.userMessage : styles.assistantMessage
+            ]}
+          >
+            <Text style={styles.messageText}>{message.text}</Text>
           </View>
         ))}
       </ScrollView>
@@ -70,23 +68,27 @@ const styles = StyleSheet.create({
   },
   message: {
     padding: 10,
+    maxWidth: '80%',
     borderRadius: 10,
-    backgroundColor: '#555'
+    marginVertical: 0
   },
   userMessage: {
-    color: '#fff',
-    textAlign: 'right'
+    alignSelf: 'flex-end',
+    backgroundColor: '#414043'
   },
   assistantMessage: {
-    color: '#fff',
-    textAlign: 'left'
+    alignSelf: 'flex-start'
   },
-  inputContainer: {},
+  messageText: {
+    color: '#fff'
+  },
+  inputContainer: {
+  },
   input: {
     padding: 10,
     width: '100%',
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     borderColor: '#565557'
   }
 })
