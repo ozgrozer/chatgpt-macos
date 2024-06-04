@@ -17,6 +17,9 @@
   // Set the initial window size here
   NSRect frame = NSMakeRect(0, 0, 800, 600); // x, y, width, height
   [self.window setFrame:frame display:YES];
+
+  // Center the window
+  [self.window center];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
