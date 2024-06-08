@@ -1,3 +1,4 @@
+import { OPENAI_API_KEY } from '@env'
 import React, { useRef, useState } from 'react'
 import {
   View,
@@ -8,13 +9,34 @@ import {
   SafeAreaView
 } from 'react-native'
 
+const openaiChatCompletion = async () => {
+  const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${OPENAI_API_KEY}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo-0125',
+      messages: [
+        {
+          role: 'user',
+          content: 'what is the capital of the usa'
+        }
+      ]
+    })
+  })
+  const data = await response.json()
+  return data.choices[0].message.content
+}
+
 export default () => {
   const inputRef = useRef(null)
   const [messages, setMessages] = useState([])
   const [inputText, setInputText] = useState('')
   const [isFocused, setIsFocused] = useState(false)
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (inputText.trim()) {
       setMessages([...messages, { sender: 'user', text: inputText }])
       setInputText('')
@@ -23,12 +45,13 @@ export default () => {
         inputRef.current.focus()
       }, 1)
 
-      setTimeout(() => {
-        setMessages(prevMessages => [
-          ...prevMessages,
-          { sender: 'assistant', text: 'This is a response from ChatGPT.' }
-        ])
-      }, 1000)
+      const chatCompletion = await openaiChatCompletion()
+      console.log(chatCompletion)
+
+      // setMessages(prevMessages => [
+      //   ...prevMessages,
+      //   { sender: 'assistant', text: 'This is a response from ChatGPT.' }
+      // ])
     }
   }
 
