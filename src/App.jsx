@@ -37,7 +37,10 @@ export default () => {
               message.sender === 'user' ? styles.userMessage : styles.assistantMessage
             ]}
           >
-            <Text style={styles.messageText}>
+            <Text
+              selectable
+              style={styles.messageText}
+            >
               {message.text}
             </Text>
           </View>
