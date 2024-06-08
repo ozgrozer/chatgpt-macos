@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   message: {
-    padding: 10,
     maxWidth: '80%',
     borderRadius: 10,
     marginVertical: 0
@@ -94,6 +93,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   messageText: {
+    padding: 10,
     color: '#fff'
   },
   inputContainer: {
