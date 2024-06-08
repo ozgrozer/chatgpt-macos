@@ -31,7 +31,10 @@ export default () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.messageContainer}>
+      <ScrollView
+        style={styles.messageContainer}
+        contentContainerStyle={{ padding: 20 }}
+      >
         {messages.map((message, index) => (
           <View
             key={index}
@@ -75,7 +78,6 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: '#252327'
   },
   messageContainer: {
