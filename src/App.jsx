@@ -10,19 +10,23 @@ import {
 } from 'react-native'
 
 const openaiChatCompletion = async ({ messages }) => {
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      messages,
-      model: OPENAI_MODEL
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        messages,
+        model: OPENAI_MODEL
+      })
     })
-  })
-  const data = await response.json()
-  return data.choices[0].message.content
+    const data = await response.json()
+    return data.choices[0].message.content
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export default () => {
