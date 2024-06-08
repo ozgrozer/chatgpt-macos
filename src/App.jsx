@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   View,
   Text,
-  Keyboard,
   TextInput,
   StyleSheet,
   ScrollView,
@@ -17,7 +16,6 @@ export default () => {
     if (inputText.trim()) {
       setMessages([...messages, { sender: 'user', text: inputText }])
       setInputText('')
-      Keyboard.dismiss()
 
       setTimeout(() => {
         setMessages(prevMessages => [
