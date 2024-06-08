@@ -1,5 +1,5 @@
-import { OPENAI_API_KEY } from '@env'
 import React, { useRef, useState } from 'react'
+import { OPENAI_MODEL, OPENAI_API_KEY } from '@env'
 import {
   View,
   Text,
@@ -18,7 +18,7 @@ const openaiChatCompletion = async ({ messages }) => {
     },
     body: JSON.stringify({
       messages,
-      model: 'gpt-3.5-turbo-0125'
+      model: OPENAI_MODEL
     })
   })
   const data = await response.json()
