@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   View,
   Text,
@@ -9,13 +9,16 @@ import {
 } from 'react-native'
 
 export default () => {
+  const inputRef = useRef(null)
   const [messages, setMessages] = useState([])
   const [inputText, setInputText] = useState('')
+  const [isFocused, setIsFocused] = useState(false)
 
   const handleSend = () => {
     if (inputText.trim()) {
       setMessages([...messages, { sender: 'user', text: inputText }])
       setInputText('')
+      inputRef.current.focus()
 
       setTimeout(() => {
         setMessages(prevMessages => [
@@ -49,12 +52,19 @@ export default () => {
 
       <View style={styles.inputContainer}>
         <TextInput
+          ref={inputRef}
           value={inputText}
           returnKeyType='send'
-          style={styles.input}
+          enableFocusRing={false}
           onChangeText={setInputText}
           onSubmitEditing={handleSend}
+          onBlur={() => setIsFocused(false)}
+          onFocus={() => setIsFocused(true)}
           placeholder='Type your message...'
+          style={[
+            styles.input,
+            isFocused && styles.inputFocused
+          ]}
         />
       </View>
     </SafeAreaView>
@@ -94,5 +104,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: '#565557'
+  },
+  inputFocused: {
+    borderColor: '#999'
   }
 })
