@@ -20,7 +20,7 @@ export default () => {
       Keyboard.dismiss()
 
       setTimeout(() => {
-        setMessages((prevMessages) => [
+        setMessages(prevMessages => [
           ...prevMessages,
           { sender: 'assistant', text: 'This is a response from ChatGPT.' }
         ])
@@ -39,18 +39,21 @@ export default () => {
               message.sender === 'user' ? styles.userMessage : styles.assistantMessage
             ]}
           >
-            <Text style={styles.messageText}>{message.text}</Text>
+            <Text style={styles.messageText}>
+              {message.text}
+            </Text>
           </View>
         ))}
       </ScrollView>
+
       <View style={styles.inputContainer}>
         <TextInput
-          style={styles.input}
           value={inputText}
-          onChangeText={setInputText}
-          placeholder='Type your message...'
-          onSubmitEditing={handleSend}
           returnKeyType='send'
+          style={styles.input}
+          onChangeText={setInputText}
+          onSubmitEditing={handleSend}
+          placeholder='Type your message...'
         />
       </View>
     </SafeAreaView>
