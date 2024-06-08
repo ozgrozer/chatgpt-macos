@@ -1,5 +1,13 @@
 # chatgpt-macos
 
+A React Native MacOS demo for ChatGPT client
+
+## Preview
+
+<img src="./preview/preview.png" alt="" width="600" />
+
+## Usage
+
 Install dependencies and initialize macos.
 
 ```
