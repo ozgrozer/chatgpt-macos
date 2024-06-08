@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   messageContentContainer: {
-    gap: 10,
+    gap: 20,
     padding: 20
   },
   message: {
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '100%',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 10,
     borderColor: '#565557'
   },
   inputFocused: {
