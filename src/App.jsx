@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   inputContainer: {
+    padding: 20
   },
   input: {
     padding: 10,
