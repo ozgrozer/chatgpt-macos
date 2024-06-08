@@ -9,7 +9,7 @@ import {
   SafeAreaView
 } from 'react-native'
 
-const openaiChatCompletion = async () => {
+const openaiChatCompletion = async ({ messages }) => {
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -17,13 +17,8 @@ const openaiChatCompletion = async () => {
       Authorization: `Bearer ${OPENAI_API_KEY}`
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo-0125',
-      messages: [
-        {
-          role: 'user',
-          content: 'what is the capital of the usa'
-        }
-      ]
+      messages,
+      model: 'gpt-3.5-turbo-0125'
     })
   })
   const data = await response.json()
@@ -38,20 +33,20 @@ export default () => {
 
   const handleSend = async () => {
     if (inputText.trim()) {
-      setMessages([...messages, { sender: 'user', text: inputText }])
+      const _messages = [...messages, { role: 'user', content: inputText }]
+      setMessages(_messages)
       setInputText('')
 
       setTimeout(() => {
         inputRef.current.focus()
       }, 1)
 
-      const chatCompletion = await openaiChatCompletion()
-      console.log(chatCompletion)
+      const chatCompletion = await openaiChatCompletion({ messages: _messages })
 
-      // setMessages(prevMessages => [
-      //   ...prevMessages,
-      //   { sender: 'assistant', text: 'This is a response from ChatGPT.' }
-      // ])
+      setMessages(prevMessages => [
+        ...prevMessages,
+        { role: 'assistant', content: chatCompletion }
+      ])
     }
   }
 
@@ -66,7 +61,7 @@ export default () => {
             key={index}
             style={[
               styles.message,
-              message.sender === 'user' ? styles.userMessage : styles.assistantMessage
+              message.role === 'user' ? styles.userMessage : styles.assistantMessage
             ]}
           >
             <Text
@@ -74,7 +69,7 @@ export default () => {
               enableFocusRing={false}
               style={styles.messageText}
             >
-              {message.text}
+              {message.content}
             </Text>
           </View>
         ))}
