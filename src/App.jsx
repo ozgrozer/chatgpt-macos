@@ -29,29 +29,33 @@ const openaiChatCompletion = async ({ messages }) => {
   }
 }
 
+const handleSend = async ({ messages, inputRef, inputText, setMessages, setInputText }) => {
+  if (inputText.trim()) {
+    const _messages = [...messages, { role: 'user', content: inputText }]
+    setMessages(_messages)
+    setInputText('')
+
+    setTimeout(() => {
+      inputRef.current.focus()
+    }, 1)
+
+    const chatCompletion = await openaiChatCompletion({ messages: _messages })
+
+    setMessages(prevMessages => [
+      ...prevMessages,
+      { role: 'assistant', content: chatCompletion }
+    ])
+  }
+}
+
 export default () => {
   const inputRef = useRef(null)
   const [messages, setMessages] = useState([])
   const [inputText, setInputText] = useState('')
   const [isFocused, setIsFocused] = useState(false)
 
-  const handleSend = async () => {
-    if (inputText.trim()) {
-      const _messages = [...messages, { role: 'user', content: inputText }]
-      setMessages(_messages)
-      setInputText('')
-
-      setTimeout(() => {
-        inputRef.current.focus()
-      }, 1)
-
-      const chatCompletion = await openaiChatCompletion({ messages: _messages })
-
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { role: 'assistant', content: chatCompletion }
-      ])
-    }
+  const _handleSend = () => {
+    handleSend({ messages, inputRef, inputText, setMessages, setInputText })
   }
 
   return (
@@ -65,7 +69,9 @@ export default () => {
             key={index}
             style={[
               styles.message,
-              message.role === 'user' ? styles.userMessage : styles.assistantMessage
+              message.role === 'user'
+                ? styles.userMessage
+                : styles.assistantMessage
             ]}
           >
             <Text
@@ -86,14 +92,11 @@ export default () => {
           returnKeyType='send'
           enableFocusRing={false}
           onChangeText={setInputText}
-          onSubmitEditing={handleSend}
+          onSubmitEditing={_handleSend}
           onBlur={() => setIsFocused(false)}
           onFocus={() => setIsFocused(true)}
           placeholder='Type your message...'
-          style={[
-            styles.input,
-            isFocused && styles.inputFocused
-          ]}
+          style={[styles.input, isFocused && styles.inputFocused]}
         />
       </View>
     </SafeAreaView>
