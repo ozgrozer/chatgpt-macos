@@ -36,7 +36,7 @@ export default () => {
     <SafeAreaView style={styles.container}>
       <ScrollView
         style={styles.messageContainer}
-        contentContainerStyle={{ padding: 20 }}
+        contentContainerStyle={{ gap: 10, padding: 20 }}
       >
         {messages.map((message, index) => (
           <View
