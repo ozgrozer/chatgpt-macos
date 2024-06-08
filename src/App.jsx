@@ -18,7 +18,10 @@ export default () => {
     if (inputText.trim()) {
       setMessages([...messages, { sender: 'user', text: inputText }])
       setInputText('')
-      inputRef.current.focus()
+
+      setTimeout(() => {
+        inputRef.current.focus()
+      }, 1)
 
       setTimeout(() => {
         setMessages(prevMessages => [
