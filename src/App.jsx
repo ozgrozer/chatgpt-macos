@@ -42,6 +42,7 @@ export default () => {
           >
             <Text
               selectable
+              enableFocusRing={false}
               style={styles.messageText}
             >
               {message.text}
